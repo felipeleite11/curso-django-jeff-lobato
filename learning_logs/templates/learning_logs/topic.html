@@ -7,12 +7,20 @@
 
 	<ul class="w-fit">
 		{% for entry in entries %}
-			<li class="hover:opacity-80 p-2 flex justify-between gap-8">
+			<li class="p-2 flex justify-between gap-8">
 				<span>{{entry.text | linebreaks}}</span>
 				<span>{{entry.date_added | date:'M d, Y H:i'}}</span>
+
+				<a href="{% url 'edit_entry' entry.id %}" class="hover:opacity-80">
+					Editar
+				</a>
 			</li>
 		{% empty%}
 			<li>Não há entradas.</li>
 		{% endfor %}
 	</ul>
+
+	<a href="{% url 'new_entry' topic.id %}" class="underline">
+		Nova entrada
+	</a>
 {% endblock content %}

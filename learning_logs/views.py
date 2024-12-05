@@ -1,8 +1,8 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-from .models import Topic
-from .forms import TopicForm
+from .models import Topic, Entry
+from .forms import TopicForm, EntryForm
 
 def index(request):
 	"""Página inicial do projeto"""
@@ -45,3 +45,48 @@ def new_topic(request):
 	context = {'form': form}
 
 	return render(request, 'learning_logs/new_topic.html', context)
+
+def new_entry(request, topic_id):
+	"""Adiciona uma nova entrada"""
+	topic = Topic.objects.get(id=topic_id)
+
+	if request.method != 'POST':
+		# Gera formulário em branco
+		form = EntryForm()
+	else:
+		# Formulário submetido
+		form = EntryForm(data=request.POST)
+
+		if form.is_valid():
+			new_entry = form.save(commit=False)
+
+			new_entry.topic = topic
+
+			new_entry. save()
+
+			return HttpResponseRedirect(reverse('topic', args=[topic_id]))
+	
+	context = {'form': form, 'topic': topic}
+
+	return render(request, 'learning_logs/new_entry.html', context)
+
+def edit_entry(request, entry_id):
+	"""Edita uma entrada"""
+	entry = Entry.objects.get(id=entry_id)
+	topic = entry.topic
+
+	if request.method != 'POST':
+		# Gera formulário em branco
+		form = EntryForm(instance=entry)
+	else:
+		# Formulário submetido
+		form = EntryForm(instance=entry, data=request.POST)
+
+		if form.is_valid():
+			form.save()
+
+			return HttpResponseRedirect(reverse('topic', args=[topic.id]))
+	
+	context = {'form': form, 'topic': topic, 'entry': entry}
+
+	return render(request, 'learning_logs/edit_entry.html', context)
