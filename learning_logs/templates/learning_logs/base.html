@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+	<html lang="pt-BR">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Página inicial</title>
+		<script src="https://cdn.tailwindcss.com"></script>
+		<style>
+			input[type=text] {
+				color: #242424;
+			}
+		</style>
+	</head>
+	<body class="bg-slate-800 text-white flex flex-col justify-between">
+		<div class="flex flex-col h-screen justify-between">
+			<header class="bg-pink-700 text-white w-full h-12 flex items-center justify-between px-6">
+				<a href="{% url 'index' %}">
+					<h1>LEARNING LOG</h1>
+				</a>
+
+				<a href="{% url 'topics' %}">
+					<h1>Tópicos</h1>
+				</a>
+			</header>
+
+			<main class="mb-auto h-full px-6 py-4">
+				{% block content %}{% endblock content %}
+			</main>
+			
+			<footer class="bg-pink-700 text-white w-full h-20">
+				<h2>FOOTER</h2>
+			</footer>
+		</div>
+	</body>
+	</html>
