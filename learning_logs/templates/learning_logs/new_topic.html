@@ -3,11 +3,11 @@
 {% block content %}
 	<h2 class="text-lg font-semibold mb-8">Cadastrar tópico</h2>	
 
-	<form action="{% url 'new_topic' %}" method="post">
+	<form action="{% url 'new_topic' %}" method="post" class="flex flex-col w-fit gap-4">
 		{% csrf_token %}
 		
 		{{ form.as_p }}
 
-		<button type="submit">Adicionar</button>
+		<button type="submit" class="bg-pink-600 p-2 rounded-md hover:opacity-80">Adicionar</button>
 	</form>
 {% endblock content %}

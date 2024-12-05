@@ -1,26 +1,31 @@
 {% extends "learning_logs/base.html" %}
 
 {% block content %}
-	<h2 class="text-lg font-semibold mb-8">Tópico {{topic}}</h2>	
+	<h2 class="text-lg font-semibold mb-4">Tópico {{topic}}</h2>
+	
+	<a href="{% url 'topics' %}" class="hover:opacity-80 text-sm underline">Voltar</a>
 
-	<h3>Entradas:</h3>
+	<h3 class="my-4 font-bold text-lg">Entradas</h3>
 
-	<ul class="w-fit">
+	<ul class="w-full mb-8">
 		{% for entry in entries %}
-			<li class="p-2 flex justify-between gap-8">
+			<li class="p-2 grid grid-cols-[1fr_8rem_3rem] justify-between items-center gap-8 border-b border-b-white text-sm">
 				<span>{{entry.text | linebreaks}}</span>
 				<span>{{entry.date_added | date:'M d, Y H:i'}}</span>
 
-				<a href="{% url 'edit_entry' entry.id %}" class="hover:opacity-80">
+				<a 
+					href="{% url 'edit_entry' entry.id %}" 
+					class="hover:opacity-80 border border-white p-1 rounded-md text-xs w-fit justify-self-end"
+				>
 					Editar
 				</a>
 			</li>
 		{% empty%}
-			<li>Não há entradas.</li>
+			<li class="italic ml-8 text-sm">Não há entradas.</li>
 		{% endfor %}
 	</ul>
 
-	<a href="{% url 'new_entry' topic.id %}" class="underline">
+	<a href="{% url 'new_entry' topic.id %}" class="bg-pink-600 p-2 rounded-md hover:opacity-80 text-sm">
 		Nova entrada
 	</a>
 {% endblock content %}

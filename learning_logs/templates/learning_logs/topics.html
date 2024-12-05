@@ -1,20 +1,20 @@
 {% extends "learning_logs/base.html" %}
 
 {% block content %}
-	<h2 class="text-lg font-semibold">Tópicos</h2>	
+	<h2 class="text-lg font-semibold mb-4">Tópicos</h2>	
 
-	<ul class="ml-4">
+	<ul class="mb-6">
 		{% for topic in topics %}
-			<li class="hover:opacity-80 p-2">
-				<a href="{% url 'topic' topic.id %}">
+			<li class="hover:opacity-80 border-b border-b-white flex">
+				<a href="{% url 'topic' topic.id %}" class="text-sm p-2 w-full h-full">
 					{{topic.text}}
 				</a>
 			</li>
 		{% empty %}
-			<li>Não há itens na lista.</li>
+			<li class="italic ml-8 text-sm">Não há itens na lista.</li>
 		{% endfor %}
 	</ul>
 
-	<a href="{% url 'new_topic' %}" class="underline">Adicionar novo</a>
+	<a href="{% url 'new_topic' %}" class="bg-pink-600 p-2 rounded-md hover:opacity-80 text-sm">Adicionar novo</a>
 
 {% endblock content %}

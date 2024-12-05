@@ -2,12 +2,12 @@
 
 {% block content %}
 
-	<form action="{% url 'register' %}" method="post" class="flex flex-col gap-3 w-fit">
+	<form action="{% url 'register' %}" method="post" class="flex flex-col gap-3">
 		{% csrf_token %}
 
 		{{ form.as_p }}
 
-		<button type="submit">
+		<button type="submit" class="bg-pink-600 p-2 rounded-md hover:opacity-80">
 			Cadastrar
 		</button>
 	</form>

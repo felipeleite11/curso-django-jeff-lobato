@@ -1,15 +1,15 @@
 {% extends "learning_logs/base.html" %}
 
 {% block content %}
-	<a href="{% url 'topic' topic.id %}">Voltar</a>
+	<a href="{% url 'topic' topic.id %}" class="hover:opacity-80 text-sm underline">Voltar</a>
 
 	<h2 class="text-lg font-semibold my-8">Cadastrar entrada</h2>
 
-	<form action="{% url 'new_entry' topic.id %}" method="post">
+	<form action="{% url 'new_entry' topic.id %}" method="post" class="flex flex-col w-fit">
 		{% csrf_token %}
 		
 		{{ form.as_p }}
 
-		<button type="submit">Adicionar</button>
+		<button type="submit" class="bg-pink-600 p-2 rounded-md hover:opacity-80">Adicionar</button>
 	</form>
 {% endblock content %}
