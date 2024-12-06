@@ -10,6 +10,11 @@ def index(request):
 	return render(request, 'learning_logs/index.html')
 
 @login_required
+def auth_index(request):
+	"""Página inicial do usuário autenticado"""
+	return render(request, 'learning_logs/auth_index.html')
+
+@login_required
 def topics(request):
 	"""Página de tópicos"""
 	topics = Topic.objects.filter(owner=request.user).order_by('date_added')
